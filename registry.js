@@ -11,23 +11,21 @@ app.use(
 )
 
 app.post('/get-response', function(req, res) {
-    const message = req.body // message object
+    const message = req.body
     var intent = message.evaluatedMessage.intent
-    console.log("Test")
     if(intent in routes){
 
         axios.post(routes[intent].route,
         {message
         }
         ).then(function (response){
-            response.history = "registry"
+            response.answer.history = "registry"
             res.send(response)
             res.end()
         })
     }else{
-        const response = {
-            "request": message,
-            "answer": "Es tut mir leid ich habe dich leider nicht verstanden",
+        message.answer = {
+            "content": "Es tut mir leid ich habe dich leider nicht verstanden",
             "history": "registry"
 
         }
