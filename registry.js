@@ -11,9 +11,9 @@ app.use(
 )
 
 app.post('/get-response', function(req, res) {
-    const {message} = req.body // message object
-    message.history = "registry"
+    const message = req.body // message object
     var intent = message.evaluatedMessage.intent
+    console.log("Test")
     if(intent in routes){
 
         axios.post(routes[intent].route,
@@ -38,6 +38,4 @@ app.post('/get-response', function(req, res) {
 });
 
 // start server
-app.listen(3000, function() {
-    console.log('Registry App listening on port 3000!')
-})
+app.listen(3000)
