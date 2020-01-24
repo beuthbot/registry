@@ -13,9 +13,9 @@ app.use(
 app.post('/get-response', function(req, res) {
     const message = req.body
     var intent = message.intent.name.toLowerCase()
-    console.log(intent)
-    if(intent in services){
+    if (services.includes(intent)){
 	const endpoint = process.env[intent.toUpperCase() + '_ENDPOINT'];
+        console.log(intent + " " + endpoint)
 	if (typeof endpoint === 'undefined') {
 		message.answer = {
 			"content": "Es tut mir leid ich kann das nicht",
@@ -31,11 +31,13 @@ app.post('/get-response', function(req, res) {
 	        {message}
         )
 	.then(function (response){
-            response.answer.history = ["registry"]
-            res.json(response)
+            response.data.answer.history.push("registry")
+            res.json(response.data)
             res.end()
         })
     }else{
+
+	console.debug(services)
         message.answer = {
             "content": "Es tut mir leid ich habe dich leider nicht verstanden",
             "history": ["registry"]
