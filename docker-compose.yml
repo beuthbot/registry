@@ -1,20 +1,10 @@
-# https://docs.docker.com/compose/compose-file/
-version: "2.0"
-
+version: '3.7'
 services:
-  registry-microservice:
-    container_name: registry-microservice
-    privileged: true
-    build:
-      context: ./
-    restart: always
-    networks:
-      - web
-    expose:
-      - 3000
-    volumes:
-      - .:/app
-
-networks:
-  web:
-    external: true
+  registry:
+    build: .
+    ports:
+      - 9922:3000
+    environment:
+      - MENSA_ENDPOINT
+      - WETTER_ENDPOINT
+      - OEFFNUNGSZEITEN_ENDPOINT

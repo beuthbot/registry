@@ -1,5 +1,5 @@
 const axios = require('axios')
-const routes =require('./serviceEndpoints.json')
+const services = require('./services.json')
 var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
@@ -12,24 +12,36 @@ app.use(
 
 app.post('/get-response', function(req, res) {
     const message = req.body
-    var intent = message.evaluatedMessage.intent
-    if(intent in routes){
+    var intent = message.intent.name.toLowerCase()
+    console.log(intent)
+    if(intent in services){
+	const endpoint = process.env[intent.toUpperCase() + '_ENDPOINT'];
+	if (typeof endpoint === 'undefined') {
+		message.answer = {
+			"content": "Es tut mir leid ich kann das nicht",
+			"history": ["registry"]
+	        }
+	        res.json(response)
+	        res.end();
+		return
+	}
 
-        axios.post(routes[intent].route,
-        {message
-        }
-        ).then(function (response){
-            response.answer.history = "registry"
-            res.send(response)
+        axios.post(
+		endpoint,
+	        {message}
+        )
+	.then(function (response){
+            response.answer.history = ["registry"]
+            res.json(response)
             res.end()
         })
     }else{
         message.answer = {
             "content": "Es tut mir leid ich habe dich leider nicht verstanden",
-            "history": "registry"
+            "history": ["registry"]
 
         }
-        res.send(response)
+        res.json(message)
         res.end();
     }
 
