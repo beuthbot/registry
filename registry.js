@@ -1,3 +1,4 @@
+
 const axios = require('axios')
 const services = require('./services.json')
 var express = require('express')
@@ -9,6 +10,13 @@ app.use(
         extended: true
     })
 )
+
+// present a simple hello text on a `GET` request on the base URL.  this can be use to check whether the deconcentrator
+// is running or not.
+app.get('/', function(req, res) {
+    res.send('Hello from BeuthBot Registry')
+    res.end()
+})
 
 app.post('/get-response', function(req, res) {
     const message = req.body

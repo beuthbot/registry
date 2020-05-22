@@ -9,3 +9,7 @@ services:
       - MENSA_ENDPOINT
       - WETTER_ENDPOINT
       - OEFFNUNGSZEITEN_ENDPOINT
+networks:
+  default:
+    external:
+      name: beuthbot_network
