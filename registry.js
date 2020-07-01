@@ -56,7 +56,7 @@ app.post('/get-response', function (req, res) {
                     response.data.answer.history.push("registry")
                     if(cacheName !== undefined) {
                         console.debug(`\n\ncached!\n${cacheName}\n\n`)
-                        cache.set(cacheName, response.data.answer, response.data.answer.ttl || 30)
+                        cache.set(cacheName, response.data.answer, response.data.answer.ttl || 1)
                     }
                     res.json(response.data)
                     res.end()
