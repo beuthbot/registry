@@ -1,6 +1,6 @@
 'use strict';
 const axios = require('axios')
-const services = require('./services.json')
+const services = require('./registry.json')
 const express = require('express')
 const bodyParser = require('body-parser')
 const NodeCache = require('node-cache')
@@ -34,16 +34,22 @@ app.get('/', function (req, res) {
 app.post('/get-response', function (req, res) {
     const message = req.body
     console.log('req.body', req.body)
+
     let intent = message.intent.name.toLowerCase()
-    if (services.includes(intent)) {
-        const endpoint = process.env[intent.toUpperCase() + '_ENDPOINT'];
+    let endpointName = services[intent]
+
+    if (endpointName) {
+
+        const endpoint = process.env[endpointName];
         console.log(intent + " " + endpoint)
+
         if (typeof endpoint === 'undefined') {
+            message.error = "no environment var given for " + endpointName
             message.answer = {
-                "content": "Es tut mir leid ich kann das nicht",
+                "content": "Es tut mir leid. Es ist ein interner Fehler aufgetreten.",
                 "history": ["registry"]
             }
-            res.json(response)
+            res.json(message)
             res.end();
             return
         }
@@ -69,8 +75,9 @@ app.post('/get-response', function (req, res) {
         }
     } else {
         console.debug(services)
+        message.error = "no endpoint registered for " + intent
         message.answer = {
-            "content": "Es tut mir leid ich habe dich leider nicht verstanden",
+            "content": "Es tut mir leid. Der Service um die Anfrage zu beantworten ist nicht registriert.",
             "history": ["registry"]
         }
         res.json(message)
