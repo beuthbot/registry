@@ -35,8 +35,20 @@ app.post('/get-response', function (req, res) {
     const message = req.body
     console.log('req.body', req.body)
 
-    let intent = message.intent.name.toLowerCase()
-    let endpointName = services[intent]
+    let intent = message.intent
+    if (!intent || !intent.name) {
+        message.error = "message has no intent property"
+        message.answer = {
+            "content": "Es tut mir leid. Es ist ein interner Fehler aufgetreten.",
+            "history": ["registry"]
+        }
+        res.json(message)
+        res.end();
+        return
+    }
+
+    let intentName = intent.name.toLowerCase()
+    let endpointName = services[intentName]
 
     if (endpointName) {
 
