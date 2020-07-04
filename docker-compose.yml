@@ -2,6 +2,7 @@ version: '3.7'
 services:
   registry:
     build: .
+    container_name: registry
     restart: unless-stopped
     ports:
       - 9922:3000
@@ -9,6 +10,7 @@ services:
       - MENSA_ENDPOINT
       - WETTER_ENDPOINT
       - OEFFNUNGSZEITEN_ENDPOINT
+      - DATABASE_ENDPOINT
 networks:
   default:
     external:

@@ -39,7 +39,7 @@ app.post('/get-response', function (req, res) {
     if (!intent || !intent.name) {
         message.error = "message has no intent property"
         message.answer = {
-            "content": "Es tut mir leid. Es ist ein interner Fehler aufgetreten.",
+            "content": "Es tut mir leid. Es ist ein interner Fehler in der Registry aufgetreten.",
             "history": ["registry"]
         }
         res.json(message)
@@ -58,7 +58,7 @@ app.post('/get-response', function (req, res) {
         if (typeof endpoint === 'undefined') {
             message.error = "no environment var given for " + endpointName
             message.answer = {
-                "content": "Es tut mir leid. Es ist ein interner Fehler aufgetreten.",
+                "content": "Es tut mir leid. Es ist ein interner Fehler in der Registry aufgetreten.",
                 "history": ["registry"]
             }
             res.json(message)
