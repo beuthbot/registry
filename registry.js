@@ -4,7 +4,7 @@ const services = require('./registry.json')
 const express = require('express')
 const bodyParser = require('body-parser')
 const NodeCache = require('node-cache')
-
+const util = require('util')
 const cache = new NodeCache()
 
 const createCacheName = function(req) {
@@ -71,11 +71,17 @@ app.post('/get-response', function (req, res) {
         if (cacheName === undefined || cache.get(cacheName) === undefined) {
             axios.post(endpoint, { message })
                 .then(function (response) {
-                    response.data.answer.history.push("registry")
-                    if(cacheName !== undefined) {
+                    if (response.data.answer && response.data.answer.history) {
+                        response.data.answer.history.push("registry")
+                    }
+
+                    if(cacheName !== undefined && !cacheName.startsWith("database") && response.data.answer) {
                         console.debug(`\n\ncached!\n${cacheName}\n\n`)
                         cache.set(cacheName, response.data.answer, response.data.answer.ttl || 1)
                     }
+
+                    console.debug("response.data:\n" + util.inspect(response.data, false, null, true))
+
                     res.json(response.data)
                     res.end()
                 })
