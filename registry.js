@@ -77,7 +77,7 @@ app.post('/get-response', function (req, res) {
 
                     if(cacheName !== undefined && !cacheName.startsWith("database") && response.data.answer) {
                         console.debug(`\n\ncached!\n${cacheName}\n\n`)
-                        cache.set(cacheName, response.data.answer, response.data.answer.ttl || 1)
+                        cache.set(cacheName, response.data.answer, response.data.answer.ttl || 1800)
                     }
 
                     console.debug("response.data:\n" + util.inspect(response.data, false, null, true))
