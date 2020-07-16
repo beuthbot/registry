@@ -11,12 +11,22 @@ const createCacheName = function(req) {
     // return string cacheName (<intent name> + _ + <entity value *>)
     // if entities.length <= 0: return undefined
     let cacheName = undefined
-    if (req.body.entities.length > 0) {
+
+    // check entities
+    if (req.body && req.body.entities && req.body.entities.length > 0) {
         cacheName = req.body.intent.name
         for (let entity of req.body.entities) {
             cacheName = `${cacheName}_${entity.value}`
         }
     }
+
+    // check user
+    if (req.body && req.body.user && req.body.user.details) {
+        for (const [ key, value ] of Object.entries(req.body.user.details)) {
+            cacheName = `${cacheName}_${key}:${value}`
+        }
+    }
+
     return cacheName
 }
 

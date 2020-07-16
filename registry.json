@@ -1,7 +1,6 @@
 {
   "mensa": "MENSA_ENDPOINT",
   "weather": "WETTER_ENDPOINT",
-  "opening-hours": "OEFFNUNGSZEITEN_ENDPOINT",
   "database-get": "DATABASE_ENDPOINT",
   "database-set": "DATABASE_ENDPOINT",
   "database-remove": "DATABASE_ENDPOINT"
