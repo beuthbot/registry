@@ -45,12 +45,16 @@ app.post('/get-response', function (req, res) {
     const message = req.body
     console.log('req.body', req.body)
 
+    const historyAdd = ['registry'];
+    const history = message.history ? message.history.concat(historyAdd) : historyAdd;
+    message.history = history;
+
     let intent = message.intent
     if (!intent || !intent.name) {
         message.error = "message has no intent property"
         message.answer = {
             "content": "Es tut mir leid. Es ist ein interner Fehler in der Registry aufgetreten.",
-            "history": ["registry"]
+            history
         }
         res.json(message)
         res.end();
@@ -69,7 +73,7 @@ app.post('/get-response', function (req, res) {
             message.error = "no environment var given for " + endpointName
             message.answer = {
                 "content": "Es tut mir leid. Es ist ein interner Fehler in der Registry aufgetreten.",
-                "history": ["registry"]
+                history
             }
             res.json(message)
             res.end();
@@ -98,6 +102,7 @@ app.post('/get-response', function (req, res) {
         } else {
             console.debug(`\n\nusing cache!\n${cacheName}\n\n`)
             message.answer = cache.get(cacheName)
+            message.answer.history = history.concat(['registry_cache']);
             res.json(message)
             res.end()
         }
@@ -106,7 +111,7 @@ app.post('/get-response', function (req, res) {
         message.error = "no endpoint registered for " + intent
         message.answer = {
             "content": "Es tut mir leid. Der Service um die Anfrage zu beantworten ist nicht registriert.",
-            "history": ["registry"]
+            history
         }
         res.json(message)
         res.end();
