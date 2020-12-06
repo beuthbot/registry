@@ -89,7 +89,9 @@ app.post('/get-response', function (req, res) {
                         response.data.answer.history.push("registry")
                     }
 
-                    if(cacheName !== undefined && !cacheName.startsWith("database") && response.data.answer) {
+                    const cacheable = response.data.answer.cacheable === undefined || response.data.answer.cacheable;
+
+                    if(cacheable && cacheName !== undefined && !cacheName.startsWith("database") && response.data.answer) {
                         console.debug(`\n\ncached!\n${cacheName}\n\n`)
                         cache.set(cacheName, response.data.answer, response.data.answer.ttl || 1800)
                     }
