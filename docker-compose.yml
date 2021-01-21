@@ -12,6 +12,7 @@ services:
       - OEFFNUNGSZEITEN_ENDPOINT
       - DATABASE_ENDPOINT
       - CATS_ENDPOINT
+      - STT_ENDPOINT
 networks:
   default:
     external:
