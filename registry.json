@@ -5,4 +5,5 @@
   "database-set": "DATABASE_ENDPOINT",
   "database-remove": "DATABASE_ENDPOINT",
   "cats": "CATS_ENDPOINT"
+  "stt": "STT_ENDPOINT"
 }
