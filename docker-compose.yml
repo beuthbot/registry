@@ -14,7 +14,8 @@ services:
       - CATS_ENDPOINT
       - STT_ENDPOINT
       - TTS_ENDPOINT
-      
+      - REMINDER_ENDPOINT
+
 networks:
   default:
     external:
