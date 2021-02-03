@@ -11,6 +11,7 @@ services:
       - WETTER_ENDPOINT
       - OEFFNUNGSZEITEN_ENDPOINT
       - DATABASE_ENDPOINT
+      - USERREGISTER_ENDPOINT
 networks:
   default:
     external:

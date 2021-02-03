@@ -3,5 +3,6 @@
   "weather": "WETTER_ENDPOINT",
   "database-get": "DATABASE_ENDPOINT",
   "database-set": "DATABASE_ENDPOINT",
-  "database-remove": "DATABASE_ENDPOINT"
+  "database-remove": "DATABASE_ENDPOINT",
+  "userRegister": "USERREGISTER_ENDPOINT"
 }
