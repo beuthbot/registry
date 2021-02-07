@@ -8,5 +8,7 @@
   "stt": "STT_ENDPOINT",
   "tts": "TTS_ENDPOINT",
   "reminder-set-once": "REMINDER_ENDPOINT",
-  "reminder-set-interval": "REMINDER_ENDPOINT"
+  "reminder-set-interval": "REMINDER_ENDPOINT",
+  "reminder-get": "REMINDER_ENDPOINT",
+  "reminder-remove": "REMINDER_ENDPOINT"
 }
