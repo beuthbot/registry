@@ -15,6 +15,7 @@ services:
       - STT_ENDPOINT
       - TTS_ENDPOINT
       - REMINDER_ENDPOINT
+      - SCRAPER_ENDPOINT
 
 networks:
   default:
