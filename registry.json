@@ -10,5 +10,10 @@
   "reminder-set-once": "REMINDER_ENDPOINT",
   "reminder-set-interval": "REMINDER_ENDPOINT",
   "reminder-get": "REMINDER_ENDPOINT",
-  "reminder-remove": "REMINDER_ENDPOINT"
+  "reminder-remove": "REMINDER_ENDPOINT",
+  "beurlaubungfrist": "SCRAPER_ENDPOINT",
+  "vorlesungszeiten": "SCRAPER_ENDPOINT",
+  "belegfrist": "SCRAPER_ENDPOINT",
+  "bewerbungsfristen": "SCRAPER_ENDPOINT",
+  "lehrkraft": "SCRAPER_ENDPOINT"
 }
