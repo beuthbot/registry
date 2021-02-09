@@ -11,7 +11,12 @@ services:
       - WETTER_ENDPOINT
       - OEFFNUNGSZEITEN_ENDPOINT
       - DATABASE_ENDPOINT
-      - USERREGISTER_ENDPOINT
+      - CATS_ENDPOINT
+      - STT_ENDPOINT
+      - TTS_ENDPOINT
+      - REMINDER_ENDPOINT
+      - SCRAPER_ENDPOINT
+
 networks:
   default:
     external:
