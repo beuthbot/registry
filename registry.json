@@ -4,5 +4,7 @@
   "database-get": "DATABASE_ENDPOINT",
   "database-set": "DATABASE_ENDPOINT",
   "database-remove": "DATABASE_ENDPOINT",
-  "userRegister": "USERREGISTER_ENDPOINT"
+  "link-user-get": "DATABASE_ENDPOINT",
+  "link-user-set": "DATABASE_ENDPOINT",
+  "link-user-remove": "DATABASE_ENDPOINT"
 }
